@@ -259,3 +259,40 @@ keycode_to_end_scan = function(code)
         return 0x80e0 | ((scancode - 0x100) << 8);
     }
 }
+
+// Get DOM element position on page
+// Credit: Joel Martin's noVNC
+get_position_of_object = function (obj) {
+    var x = 0, y = 0;
+    if (obj.offsetParent) {
+        do {
+            x += obj.offsetLeft;
+            y += obj.offsetTop;
+            obj = obj.offsetParent;
+        } while (obj);
+    }
+    return {'x': x, 'y': y};
+};
+
+// Get mouse event position in DOM element
+// Credit: Joel Martin's noVNC
+get_event_position = function (e, obj, scale) {
+    var evt, docX, docY, pos;
+    //if (!e) evt = window.event;
+    evt = (e ? e : window.event);
+    evt = (evt.changedTouches ? evt.changedTouches[0] : evt.touches ? evt.touches[0] : evt);
+    if (evt.pageX || evt.pageY) {
+        docX = evt.pageX;
+        docY = evt.pageY;
+    } else if (evt.clientX || evt.clientY) {
+        docX = evt.clientX + document.body.scrollLeft +
+            document.documentElement.scrollLeft;
+        docY = evt.clientY + document.body.scrollTop +
+            document.documentElement.scrollTop;
+    }
+    pos = get_position_of_object(obj);
+    if (typeof scale === "undefined") {
+        scale = 1;
+    }
+    return {'x': (docX - pos.x) / scale, 'y': (docY - pos.y) / scale};
+};
