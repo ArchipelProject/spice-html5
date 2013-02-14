@@ -24,7 +24,7 @@
 **  callback.  It will optionally save and pass along a header, useful in processing
 **  the mini message format.
 **--------------------------------------------------------------------------------------*/
-function SpiceWireReader(sc, callback)
+SpiceWireReader = function(sc, callback)
 {
     this.sc = sc;
     this.callback = callback;
@@ -96,7 +96,7 @@ SpiceWireReader.prototype =
             this.callback.call(this.sc, mb,
                         this.saved_msg_header || undefined);
         }
-        
+
     },
 
     request: function(n)

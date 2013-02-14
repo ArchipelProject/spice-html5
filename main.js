@@ -22,7 +22,7 @@
 **  SpiceMainConn
 **      This is the master Javascript class for establishing and
 **  managing a connection to a Spice Server.
-**  
+**
 **      Invocation:  You must pass an object with properties as follows:
 **          uri         (required)  Uri of a WebSocket listener that is
 **                                  connected to a spice server.
@@ -45,13 +45,12 @@
 **      browser, including WebSocket and WebSocket.binaryType == arraybuffer
 **
 **--------------------------------------------------------------------------*/
-function SpiceMainConn()
+SpiceMainConn = function()
 {
     if (typeof WebSocket === "undefined")
         throw new Error("WebSocket unavailable.  You need to use a different browser.");
 
     SpiceConn.apply(this, arguments);
-
 }
 
 SpiceMainConn.prototype = Object.create(SpiceConn.prototype);

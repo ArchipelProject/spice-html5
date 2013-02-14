@@ -23,10 +23,10 @@
 **      This is the base Javascript class for establishing and
 **  managing a connection to a Spice Server.
 **  It is used to provide core functionality to the Spice main,
-**  display, inputs, and cursor channels.  See main.js for 
+**  display, inputs, and cursor channels.  See main.js for
 **  usage.
 **--------------------------------------------------------------------------*/
-function SpiceConn(o)
+SpiceConn = function(o)
 {
     if (o === undefined || o.uri === undefined || ! o.uri)
         throw new Error("You must specify a uri");
@@ -166,7 +166,6 @@ SpiceConn.prototype =
                 if (msg.type > 500)
                 {
                     alert("Something has gone very wrong; we think we have message of type " + msg.type);
-                    debugger;
                 }
 
                 if (msg.size == 0)

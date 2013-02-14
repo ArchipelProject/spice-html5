@@ -23,7 +23,7 @@
 **  bitmap.js
 **      Handle SPICE_IMAGE_TYPE_BITMAP
 **--------------------------------------------------------------------------*/
-function convert_spice_bitmap_to_web(context, spice_bitmap)
+convert_spice_bitmap_to_web = function(context, spice_bitmap)
 {
     var ret;
     var offset, x;

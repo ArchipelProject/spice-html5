@@ -25,7 +25,7 @@
 **  to and from the server.
 **--------------------------------------------------------------------------*/
 
-function SpiceChannelId()
+SpiceChannelId = function()
 {
 }
 SpiceChannelId.prototype =
@@ -38,7 +38,7 @@ SpiceChannelId.prototype =
     },
 }
 
-function SpiceRect()
+SpiceRect = function()
 {
 }
 
@@ -62,7 +62,7 @@ SpiceRect.prototype =
     },
 }
 
-function SpiceClipRects()
+SpiceClipRects = function()
 {
 }
 
@@ -83,7 +83,7 @@ SpiceClipRects.prototype =
     },
 }
 
-function SpiceClip()
+SpiceClip = function()
 {
 }
 
@@ -101,7 +101,7 @@ SpiceClip.prototype =
     },
 }
 
-function SpiceImageDescriptor()
+SpiceImageDescriptor = function()
 {
 }
 
@@ -119,7 +119,7 @@ SpiceImageDescriptor.prototype =
     },
 }
 
-function SpicePalette()
+SpicePalette =function()
 {
 }
 
@@ -141,7 +141,7 @@ SpicePalette.prototype =
     },
 }
 
-function SpiceBitmap()
+SpiceBitmap = function()
 {
 }
 
@@ -179,7 +179,7 @@ SpiceBitmap.prototype =
     },
 }
 
-function SpiceImage()
+SpiceImage = function()
 {
 }
 
@@ -275,7 +275,7 @@ SpiceImage.prototype =
 }
 
 
-function SpiceQMask()
+SpiceQMask = function()
 {
 }
 
@@ -299,7 +299,7 @@ SpiceQMask.prototype =
 }
 
 
-function SpicePattern()
+SpicePattern = function()
 {
 }
 
@@ -323,7 +323,7 @@ SpicePattern.prototype =
     }
 }
 
-function SpiceBrush()
+SpiceBrush = function()
 {
 }
 
@@ -345,7 +345,7 @@ SpiceBrush.prototype =
     },
 }
 
-function SpiceFill()
+SpiceFill = function()
 {
 }
 
@@ -362,7 +362,7 @@ SpiceFill.prototype =
 }
 
 
-function SpiceCopy()
+SpiceCopy = function()
 {
 }
 
@@ -389,7 +389,7 @@ SpiceCopy.prototype =
     },
 }
 
-function SpicePoint16()
+SpicePoint16 = function()
 {
 }
 
@@ -403,7 +403,7 @@ SpicePoint16.prototype =
     },
 }
 
-function SpicePoint()
+SpicePoint = function()
 {
 }
 
@@ -417,7 +417,7 @@ SpicePoint.prototype =
     },
 }
 
-function SpiceCursorHeader()
+SpiceCursorHeader = function()
 {
 }
 
@@ -437,7 +437,7 @@ SpiceCursorHeader.prototype =
     },
 }
 
-function SpiceCursor()
+SpiceCursor = function()
 {
 }
 
@@ -459,7 +459,7 @@ SpiceCursor.prototype =
     },
 }
 
-function SpiceSurface()
+SpiceSurface = function()
 {
 }
 
@@ -476,5 +476,5 @@ SpiceSurface.prototype =
     },
 }
 
-/* FIXME - SpiceImage  types lz_plt, jpeg, zlib_glz, and jpeg_alpha are 
+/* FIXME - SpiceImage  types lz_plt, jpeg, zlib_glz, and jpeg_alpha are
            completely unimplemented */

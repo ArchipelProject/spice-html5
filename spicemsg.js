@@ -21,10 +21,10 @@
 /*----------------------------------------------------------------------------
 **  Spice messages
 **      This file contains classes for passing messages to and from
-**  a spice server.  This file should arguably be generated from 
+**  a spice server.  This file should arguably be generated from
 **  spice.proto, but it was instead put together by hand.
 **--------------------------------------------------------------------------*/
-function SpiceLinkHeader(a, at)
+SpiceLinkHeader = function(a, at)
 {
     this.magic = SPICE_MAGIC;
     this.major_version = SPICE_VERSION_MAJOR;
@@ -63,12 +63,12 @@ SpiceLinkHeader.prototype =
         dv.setUint32(at, this.size, true); at += 4;
     },
     buffer_size: function()
-    { 
+    {
         return 16;
     },
 }
 
-function SpiceLinkMess(a, at)
+SpiceLinkMess = function(a, at)
 {
     this.connection_id = 0;
     this.channel_type = 0;
@@ -138,7 +138,7 @@ SpiceLinkMess.prototype =
     }
 }
 
-function SpiceLinkReply(a, at)
+SpiceLinkReply = function(a, at)
 {
     this.error = 0;
     this.pub_key = undefined;
@@ -181,7 +181,7 @@ SpiceLinkReply.prototype =
     },
 }
 
-function SpiceLinkAuthTicket(a, at)
+SpiceLinkAuthTicket = function(a, at)
 {
     this.auth_mechanism = 0;
     this.encrypted_data = undefined;
@@ -210,7 +210,7 @@ SpiceLinkAuthTicket.prototype =
     }
 }
 
-function SpiceLinkAuthReply(a, at)
+SpiceLinkAuthReply = function(a, at)
 {
     this.auth_code = 0;
     if (a !== undefined)
@@ -231,7 +231,7 @@ SpiceLinkAuthReply.prototype =
     }
 }
 
-function SpiceMiniData(a, at)
+SpiceMiniData = function(a, at)
 {
     this.type = 0;
     this.size = 0;
@@ -285,7 +285,7 @@ SpiceMiniData.prototype =
     },
 }
 
-function SpiceMsgChannels(a, at)
+SpiceMsgChannels = function(a, at)
 {
     this.num_of_channels = 0;
     this.channels = [];
@@ -310,7 +310,7 @@ SpiceMsgChannels.prototype =
     },
 }
 
-function SpiceMsgMainInit(a, at)
+SpiceMsgMainInit = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -332,7 +332,7 @@ SpiceMsgMainInit.prototype =
     },
 }
 
-function SpiceMsgMainMouseMode(a, at)
+SpiceMsgMainMouseMode = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -348,7 +348,7 @@ SpiceMsgMainMouseMode.prototype =
     },
 }
 
-function SpiceMsgSetAck(a, at)
+SpiceMsgSetAck = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -364,7 +364,7 @@ SpiceMsgSetAck.prototype =
     },
 }
 
-function SpiceMsgcAckSync(ack)
+SpiceMsgcAckSync = function(ack)
 {
     this.generation = ack.generation;
 }
@@ -383,7 +383,7 @@ SpiceMsgcAckSync.prototype =
     }
 }
 
-function SpiceMsgcMainMouseModeRequest(mode)
+SpiceMsgcMainMouseModeRequest = function(mode)
 {
     this.mode = mode;
 }
@@ -402,7 +402,7 @@ SpiceMsgcMainMouseModeRequest.prototype =
     }
 }
 
-function SpiceMsgNotify(a, at)
+SpiceMsgNotify = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -430,7 +430,7 @@ SpiceMsgNotify.prototype =
     },
 }
 
-function SpiceMsgcDisplayInit()
+SpiceMsgcDisplayInit = function()
 {
     this.pixmap_cache_id = 1;
     this.glz_dictionary_id = 0;
@@ -456,7 +456,7 @@ SpiceMsgcDisplayInit.prototype =
     }
 }
 
-function SpiceMsgDisplayBase()
+SpiceMsgDisplayBase = function()
 {
 }
 
@@ -472,7 +472,7 @@ SpiceMsgDisplayBase.prototype =
     },
 }
 
-function SpiceMsgDisplayDrawCopy(a, at)
+SpiceMsgDisplayDrawCopy = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -490,7 +490,7 @@ SpiceMsgDisplayDrawCopy.prototype =
     },
 }
 
-function SpiceMsgDisplayDrawFill(a, at)
+SpiceMsgDisplayDrawFill = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -508,7 +508,7 @@ SpiceMsgDisplayDrawFill.prototype =
     },
 }
 
-function SpiceMsgDisplayCopyBits(a, at)
+SpiceMsgDisplayCopyBits = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -527,7 +527,7 @@ SpiceMsgDisplayCopyBits.prototype =
 }
 
 
-function SpiceMsgSurfaceCreate(a, at)
+SpiceMsgSurfaceCreate = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -543,7 +543,7 @@ SpiceMsgSurfaceCreate.prototype =
     },
 }
 
-function SpiceMsgSurfaceDestroy(a, at)
+SpiceMsgSurfaceDestroy = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -558,7 +558,7 @@ SpiceMsgSurfaceDestroy.prototype =
     },
 }
 
-function SpiceMsgInputsInit(a, at)
+SpiceMsgInputsInit = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -574,7 +574,7 @@ SpiceMsgInputsInit.prototype =
     },
 }
 
-function SpiceMsgInputsKeyModifiers(a, at)
+SpiceMsgInputsKeyModifiers = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -590,7 +590,7 @@ SpiceMsgInputsKeyModifiers.prototype =
     },
 }
 
-function SpiceMsgCursorInit(a, at)
+SpiceMsgCursorInit = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -632,7 +632,7 @@ SpiceMsgCursorSet.prototype =
 }
 
 
-function SpiceMsgcMousePosition(sc, e)
+SpiceMsgcMousePosition = function(sc, e)
 {
     // FIXME - figure out how to correctly compute display_id
     this.display_id = 0;
@@ -642,7 +642,7 @@ function SpiceMsgcMousePosition(sc, e)
         this.x = e.clientX - sc.display.surfaces[sc.display.primary_surface].canvas.offsetLeft + document.body.scrollLeft;
         this.y = e.clientY - sc.display.surfaces[sc.display.primary_surface].canvas.offsetTop + document.body.scrollTop;
         sc.mousex = this.x;
-        sc.mousey = this.y; 
+        sc.mousey = this.y;
     }
     else
     {
@@ -668,7 +668,7 @@ SpiceMsgcMousePosition.prototype =
     }
 }
 
-function SpiceMsgcMouseMotion(sc, e)
+SpiceMsgcMouseMotion = function(sc, e)
 {
     // FIXME - figure out how to correctly compute display_id
     this.display_id = 0;
@@ -696,7 +696,7 @@ function SpiceMsgcMouseMotion(sc, e)
 SpiceMsgcMouseMotion.prototype.to_buffer = SpiceMsgcMousePosition.prototype.to_buffer;
 SpiceMsgcMouseMotion.prototype.buffer_size = SpiceMsgcMousePosition.prototype.buffer_size;
 
-function SpiceMsgcMousePress(sc, e)
+SpiceMsgcMousePress = function(sc, e)
 {
     if (e)
     {
@@ -727,7 +727,7 @@ SpiceMsgcMousePress.prototype =
     }
 }
 
-function SpiceMsgcMouseRelease(sc, e)
+SpiceMsgcMouseRelease = function(sc, e)
 {
     if (e)
     {
@@ -747,7 +747,7 @@ SpiceMsgcMouseRelease.prototype.to_buffer = SpiceMsgcMousePress.prototype.to_buf
 SpiceMsgcMouseRelease.prototype.buffer_size = SpiceMsgcMousePress.prototype.buffer_size;
 
 
-function SpiceMsgcKeyDown(e)
+SpiceMsgcKeyDown = function(e)
 {
     if (e)
     {
@@ -774,7 +774,7 @@ SpiceMsgcKeyDown.prototype =
     }
 }
 
-function SpiceMsgcKeyUp(e)
+SpiceMsgcKeyUp = function(e)
 {
     if (e)
     {
@@ -790,7 +790,7 @@ function SpiceMsgcKeyUp(e)
 SpiceMsgcKeyUp.prototype.to_buffer = SpiceMsgcKeyDown.prototype.to_buffer;
 SpiceMsgcKeyUp.prototype.buffer_size = SpiceMsgcKeyDown.prototype.buffer_size;
 
-function SpiceMsgDisplayStreamCreate(a, at)
+SpiceMsgDisplayStreamCreate = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -818,7 +818,7 @@ SpiceMsgDisplayStreamCreate.prototype =
     },
 }
 
-function SpiceStreamDataHeader(a, at)
+SpiceStreamDataHeader = function(a, at)
 {
 }
 
@@ -832,7 +832,7 @@ SpiceStreamDataHeader.prototype =
     },
 }
 
-function SpiceMsgDisplayStreamData(a, at)
+SpiceMsgDisplayStreamData = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -850,7 +850,7 @@ SpiceMsgDisplayStreamData.prototype =
     },
 }
 
-function SpiceMsgDisplayStreamClip(a, at)
+SpiceMsgDisplayStreamClip = function(a, at)
 {
     this.from_buffer(a, at);
 }
@@ -867,7 +867,7 @@ SpiceMsgDisplayStreamClip.prototype =
     },
 }
 
-function SpiceMsgDisplayStreamDestroy(a, at)
+SpiceMsgDisplayStreamDestroy = function(a, at)
 {
     this.from_buffer(a, at);
 }

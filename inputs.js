@@ -32,7 +32,7 @@ var Meta_state = -1;
 **  SpiceInputsConn
 **      Drive the Spice Inputs channel (e.g. mouse + keyboard)
 **--------------------------------------------------------------------------*/
-function SpiceInputsConn()
+SpiceInputsConn = function()
 {
     SpiceConn.apply(this, arguments);
 
@@ -72,7 +72,7 @@ SpiceInputsConn.prototype.process_channel_message = function(msg)
 
 
 
-function handle_mousemove(e)
+handle_mousemove = function(e)
 {
     var msg = new SpiceMiniData();
     var move;
@@ -100,7 +100,7 @@ function handle_mousemove(e)
     }
 }
 
-function handle_mousedown(e)
+handle_mousedown = function(e)
 {
     var press = new SpiceMsgcMousePress(this.sc, e)
     var msg = new SpiceMiniData();
@@ -111,13 +111,13 @@ function handle_mousedown(e)
     e.preventDefault();
 }
 
-function handle_contextmenu(e)
+handle_contextmenu = function(e)
 {
     e.preventDefault();
     return false;
 }
 
-function handle_mouseup(e)
+handle_mouseup = function(e)
 {
     var release = new SpiceMsgcMouseRelease(this.sc, e)
     var msg = new SpiceMiniData();
@@ -128,7 +128,7 @@ function handle_mouseup(e)
     e.preventDefault();
 }
 
-function handle_mousewheel(e)
+handle_mousewheel = function(e)
 {
     var press = new SpiceMsgcMousePress;
     var release = new SpiceMsgcMouseRelease;
@@ -151,7 +151,7 @@ function handle_mousewheel(e)
     e.preventDefault();
 }
 
-function handle_keydown(e)
+handle_keydown = function(e)
 {
     var key = new SpiceMsgcKeyDown(e)
     var msg = new SpiceMiniData();
@@ -163,7 +163,7 @@ function handle_keydown(e)
     e.preventDefault();
 }
 
-function handle_keyup(e)
+handle_keyup = function(e)
 {
     var key = new SpiceMsgcKeyUp(e)
     var msg = new SpiceMiniData();
@@ -175,7 +175,7 @@ function handle_keyup(e)
     e.preventDefault();
 }
 
-function update_modifier(state, code, sc)
+update_modifier = function(state, code, sc)
 {
     var msg = new SpiceMiniData();
     if (!state)
@@ -194,7 +194,7 @@ function update_modifier(state, code, sc)
     sc.inputs.send_msg(msg);
 }
 
-function check_and_update_modifiers(e, code, sc)
+check_and_update_modifiers = function(e, code, sc)
 {
     if (Shift_state === -1)
     {

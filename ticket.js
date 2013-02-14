@@ -143,7 +143,7 @@ function find_sequence(u8, at)
 /*----------------------------------------------------------------------------
 **  Extract an RSA key from a memory buffer
 **--------------------------------------------------------------------------*/
-function create_rsa_from_mb(mb, at)
+create_rsa_from_mb = function(mb, at)
 {
     var u8 = new Uint8Array(mb);
     var lenblock;
@@ -227,7 +227,7 @@ function create_rsa_from_mb(mb, at)
     return ret;
 }
 
-function rsa_encrypt(rsa, str)
+rsa_encrypt = function(rsa, str)
 {
     var i;
     var ret = [];

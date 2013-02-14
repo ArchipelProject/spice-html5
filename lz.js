@@ -24,7 +24,7 @@
 **      Functions for handling SPICE_IMAGE_TYPE_LZ_RGB
 **  Adapted from lz.c .
 **--------------------------------------------------------------------------*/
-function lz_rgb32_decompress(in_buf, at, out_buf, type, default_alpha)
+lz_rgb32_decompress = function(in_buf, at, out_buf, type, default_alpha)
 {
     var encoder = at;
     var op = 0;
@@ -141,7 +141,7 @@ function lz_rgb32_decompress(in_buf, at, out_buf, type, default_alpha)
     return encoder - 1;
 }
 
-function convert_spice_lz_to_web(context, lz_image)
+convert_spice_lz_to_web = function(context, lz_image)
 {
     var at;
     if (lz_image.type === LZ_IMAGE_TYPE_RGB32 || lz_image.type === LZ_IMAGE_TYPE_RGBA)

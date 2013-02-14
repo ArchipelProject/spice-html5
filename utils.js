@@ -21,9 +21,9 @@
 /*----------------------------------------------------------------------------
 **  Utility settings and functions for Spice
 **--------------------------------------------------------------------------*/
-var DEBUG = 0;
-var DUMP_DRAWS = false;
-var DUMP_CANVASES = false;
+DEBUG = 0;
+DUMP_DRAWS = false;
+DUMP_CANVASES = false;
 
 
 /*----------------------------------------------------------------------------
@@ -31,7 +31,7 @@ var DUMP_CANVASES = false;
 **      Combine two array buffers.
 **      FIXME - this can't be optimal.  See wire.js about eliminating the need.
 **--------------------------------------------------------------------------*/
-function combine_array_buffers(a1, a2)
+combine_array_buffers = function(a1, a2)
 {
     var in1 = new Uint8Array(a1);
     var in2 = new Uint8Array(a2);
@@ -50,7 +50,7 @@ function combine_array_buffers(a1, a2)
 /*----------------------------------------------------------------------------
 **  hexdump_buffer
 **--------------------------------------------------------------------------*/
-function hexdump_buffer(a)
+hexdump_buffer = function(a)
 {
     var mg = new Uint8Array(a);
     var hex = "";
@@ -218,7 +218,7 @@ DOM_scanmap[189]                = KEY_Minus;
 DOM_scanmap[187]                = KEY_Equal;
 DOM_scanmap[186]                = KEY_SemiColon;
 
-function get_scancode(code)
+get_scancode = function(code)
 {
     if (common_scanmap[code] === undefined)
     {
@@ -231,7 +231,7 @@ function get_scancode(code)
         return common_scanmap[code];
 }
 
-function keycode_to_start_scan(code)
+keycode_to_start_scan = function(code)
 {
     var scancode = get_scancode(code);
     if (scancode === undefined)
@@ -247,7 +247,7 @@ function keycode_to_start_scan(code)
     }
 }
 
-function keycode_to_end_scan(code)
+keycode_to_end_scan = function(code)
 {
     var scancode = get_scancode(code);
     if (scancode === undefined)

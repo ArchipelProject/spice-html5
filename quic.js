@@ -1264,7 +1264,7 @@ QuicEncoder.prototype.simple_quic_decode = function(buf)
     return undefined;
 }
 
-function SpiceQuic()
+SpiceQuic = function()
 {
 }
 
@@ -1289,7 +1289,7 @@ SpiceQuic.prototype =
     },
 }
 
-function convert_spice_quic_to_web(context, spice_quic)
+convert_spice_quic_to_web = function(context, spice_quic)
 {
     var ret = context.createImageData(spice_quic.width, spice_quic.height);
     var i;

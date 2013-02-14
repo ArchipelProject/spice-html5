@@ -229,7 +229,7 @@ PngIEND.prototype =
 }
 
 
-function create_rgba_png(width, height, bytes)
+create_rgba_png = function(width, height, bytes)
 {
     var i;
     var ihdr = new PngIHDR(width, height);

@@ -34,20 +34,20 @@ var b64pad  = ""; /* base-64 pad character. "=" for strict RFC compliance   */
  * These are the functions you'll usually want to call
  * They take string arguments and return either hex or base-64 encoded strings
  */
-function hex_sha1(s)    { return rstr2hex(rstr_sha1(str2rstr_utf8(s))); }
-function b64_sha1(s)    { return rstr2b64(rstr_sha1(str2rstr_utf8(s))); }
-function any_sha1(s, e) { return rstr2any(rstr_sha1(str2rstr_utf8(s)), e); }
-function hex_hmac_sha1(k, d)
+hex_sha1 = function(s)    { return rstr2hex(rstr_sha1(str2rstr_utf8(s))); }
+b64_sha1 = function(s)    { return rstr2b64(rstr_sha1(str2rstr_utf8(s))); }
+any_sha1 = function(s, e) { return rstr2any(rstr_sha1(str2rstr_utf8(s)), e); }
+hex_hmac_sha1 = function(k, d)
   { return rstr2hex(rstr_hmac_sha1(str2rstr_utf8(k), str2rstr_utf8(d))); }
-function b64_hmac_sha1(k, d)
+b64_hmac_sha1 = function(k, d)
   { return rstr2b64(rstr_hmac_sha1(str2rstr_utf8(k), str2rstr_utf8(d))); }
-function any_hmac_sha1(k, d, e)
+b64_hmac_sha1 = function(k, d, e)
   { return rstr2any(rstr_hmac_sha1(str2rstr_utf8(k), str2rstr_utf8(d)), e); }
 
 /*
  * Perform a simple self-test to see if the VM is working
  */
-function sha1_vm_test()
+sha1_vm_test = function()
 {
   return hex_sha1("abc").toLowerCase() == "a9993e364706816aba3e25717850c26c9cd0d89d";
 }
@@ -55,7 +55,7 @@ function sha1_vm_test()
 /*
  * Calculate the SHA1 of a raw string
  */
-function rstr_sha1(s)
+rstr_sha1 = function(s)
 {
   return binb2rstr(binb_sha1(rstr2binb(s), s.length * 8));
 }
@@ -63,7 +63,7 @@ function rstr_sha1(s)
 /*
  * Calculate the HMAC-SHA1 of a key and some data (raw strings)
  */
-function rstr_hmac_sha1(key, data)
+rstr_hmac_sha1 = function(key, data)
 {
   var bkey = rstr2binb(key);
   if(bkey.length > 16) bkey = binb_sha1(bkey, key.length * 8);
@@ -82,7 +82,7 @@ function rstr_hmac_sha1(key, data)
 /*
  * Convert a raw string to a hex string
  */
-function rstr2hex(input)
+rstr2hex = function(input)
 {
   try { hexcase } catch(e) { hexcase=0; }
   var hex_tab = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
@@ -100,7 +100,7 @@ function rstr2hex(input)
 /*
  * Convert a raw string to a base-64 string
  */
-function rstr2b64(input)
+rstr2b64 = function(input)
 {
   try { b64pad } catch(e) { b64pad=''; }
   var tab = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
@@ -123,7 +123,7 @@ function rstr2b64(input)
 /*
  * Convert a raw string to an arbitrary string encoding
  */
-function rstr2any(input, encoding)
+rstr2any = function(input, encoding)
 {
   var divisor = encoding.length;
   var remainders = Array();
@@ -176,7 +176,7 @@ function rstr2any(input, encoding)
  * Encode a string as utf-8.
  * For efficiency, this assumes the input is valid utf-16.
  */
-function str2rstr_utf8(input)
+str2rstr_utf8 = function(input)
 {
   var output = "";
   var i = -1;
@@ -215,7 +215,7 @@ function str2rstr_utf8(input)
 /*
  * Encode a string as utf-16
  */
-function str2rstr_utf16le(input)
+str2rstr_utf16le = function(input)
 {
   var output = "";
   for(var i = 0; i < input.length; i++)
@@ -224,7 +224,7 @@ function str2rstr_utf16le(input)
   return output;
 }
 
-function str2rstr_utf16be(input)
+str2rstr_utf16be = function(input)
 {
   var output = "";
   for(var i = 0; i < input.length; i++)
@@ -237,7 +237,7 @@ function str2rstr_utf16be(input)
  * Convert a raw string to an array of big-endian words
  * Characters >255 have their high-byte silently ignored.
  */
-function rstr2binb(input)
+rstr2binb = function(input)
 {
   var output = Array(input.length >> 2);
   for(var i = 0; i < output.length; i++)
@@ -250,7 +250,7 @@ function rstr2binb(input)
 /*
  * Convert an array of big-endian words to a string
  */
-function binb2rstr(input)
+binb2rstr = function(input)
 {
   var output = "";
   for(var i = 0; i < input.length * 32; i += 8)
@@ -261,7 +261,7 @@ function binb2rstr(input)
 /*
  * Calculate the SHA-1 of an array of big-endian words, and a bit length
  */
-function binb_sha1(x, len)
+binb_sha1 = function(x, len)
 {
   /* append padding */
   x[len >> 5] |= 0x80 << (24 - len % 32);
@@ -309,7 +309,7 @@ function binb_sha1(x, len)
  * Perform the appropriate triplet combination function for the current
  * iteration
  */
-function sha1_ft(t, b, c, d)
+sha1_ft = function(t, b, c, d)
 {
   if(t < 20) return (b & c) | ((~b) & d);
   if(t < 40) return b ^ c ^ d;
@@ -320,7 +320,7 @@ function sha1_ft(t, b, c, d)
 /*
  * Determine the appropriate additive constant for the current iteration
  */
-function sha1_kt(t)
+sha1_kt = function(t)
 {
   return (t < 20) ?  1518500249 : (t < 40) ?  1859775393 :
          (t < 60) ? -1894007588 : -899497514;
@@ -330,7 +330,7 @@ function sha1_kt(t)
  * Add integers, wrapping at 2^32. This uses 16-bit operations internally
  * to work around bugs in some JS interpreters.
  */
-function safe_add(x, y)
+safe_add = function(x, y)
 {
   var lsw = (x & 0xFFFF) + (y & 0xFFFF);
   var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
@@ -340,7 +340,7 @@ function safe_add(x, y)
 /*
  * Bitwise rotate a 32-bit number to the left.
  */
-function bit_rol(num, cnt)
+bit_rol = function(num, cnt)
 {
   return (num << cnt) | (num >>> (32 - cnt));
 }

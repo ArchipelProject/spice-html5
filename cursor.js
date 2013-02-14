@@ -23,7 +23,7 @@
 **  SpiceCursorConn
 **      Drive the Spice Cursor Channel
 **--------------------------------------------------------------------------*/
-function SpiceCursorConn()
+SpiceCursorConn = function()
 {
     SpiceConn.apply(this, arguments);
 }
@@ -86,7 +86,7 @@ SpiceCursorConn.prototype.process_channel_message = function(msg)
 SpiceCursorConn.prototype.set_cursor = function(cursor)
 {
     var pngstr = create_rgba_png(cursor.header.height, cursor.header.width, cursor.data);
-    var curstr = 'url(data:image/png,' + pngstr + ') ' + 
+    var curstr = 'url(data:image/png,' + pngstr + ') ' +
         cursor.header.hot_spot_x + ' ' + cursor.header.hot_spot_y + ", default";
     document.getElementById(this.parent.screen_id).style.cursor = curstr;
 }
