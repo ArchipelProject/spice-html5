@@ -55,6 +55,8 @@ SpiceConn = function(o)
         this.password = o.password;
     if (o.onerror !== undefined)
         this.onerror = o.onerror;
+    if (o.onresize !== undefined)
+        this.onresize = o.onresize;
 
     this.state = "connecting";
     this.ws.parent = this;

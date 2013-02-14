@@ -40,6 +40,9 @@
 **          onerror     (optional)  If given, a function to receive async
 **                                  errors.  Note that you should also catch
 **                                  errors for ones that occur inline
+**          onresize    (optional)  If given, a function to receive async
+**                                  resize event. Two parameters are given
+**                                  to the function, new width and new height
 **
 **  Throws error if there are troubles.  Requires a modern (by 2012 standards)
 **      browser, including WebSocket and WebSocket.binaryType == arraybuffer

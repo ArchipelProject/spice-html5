@@ -429,6 +429,9 @@ SpiceDisplayConn.prototype.process_channel_message = function(msg)
         canvas.setAttribute('width', m.surface.width);
         canvas.setAttribute('height', m.surface.height);
 
+        if (this.parent.onresize)
+            this.parent.onresize(m.surface.width, m.surface.height);
+
         canvas.setAttribute('id', "spice_surface_" + m.surface.surface_id);
         canvas.setAttribute('tabindex', m.surface.surface_id);
         canvas.context = canvas.getContext("2d");
