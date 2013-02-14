@@ -1,4 +1,4 @@
-"use strict";
+/* "use strict" commented for Cappuccino */
 /*
    Copyright (C) 2012 by Jeremy P. White <jwhite@codeweavers.com>
 
