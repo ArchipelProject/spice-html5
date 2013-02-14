@@ -148,7 +148,7 @@ SpiceMainConn.prototype.process_channel_message = function(msg)
 
 SpiceMainConn.prototype.stop = function(msg)
 {
-    this.state = "closing";
+    this.set_state("closing");
 
     if (this.inputs)
     {

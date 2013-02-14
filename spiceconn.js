@@ -57,8 +57,11 @@ SpiceConn = function(o)
         this.onerror = o.onerror;
     if (o.onresize !== undefined)
         this.onresize = o.onresize;
+    if (o.onchange_state !== undefined)
+        this.onchange_state = o.onchange_state;
 
-    this.state = "connecting";
+    this.set_state("connecting");
+
     this.ws.parent = this;
     this.wire_reader = new SpiceWireReader(this, this.process_inbound);
     this.messages_sent = 0;
@@ -195,7 +198,7 @@ SpiceConn.prototype =
             this.reply_hdr = new SpiceLinkHeader(mb);
             if (this.reply_hdr.magic != SPICE_MAGIC)
             {
-                this.state = "error";
+                this.set_state("error");
                 var e = new Error('Error: magic mismatch: ' + this.reply_hdr.magic);
                 this.report_error(e);
             }
@@ -203,7 +206,7 @@ SpiceConn.prototype =
             {
                 // FIXME - Determine major/minor version requirements
                 this.wire_reader.request(this.reply_hdr.size);
-                this.state = "link";
+                this.set_state("link");
             }
         }
 
@@ -213,14 +216,14 @@ SpiceConn.prototype =
              // FIXME - Screen the caps - require minihdr at least, right?
             if (this.reply_link.error)
             {
-                this.state = "error";
+                this.set_state("error");
                 var e = new Error('Error: reply link error ' + this.reply_link.error);
                 this.report_error(e);
             }
             else
             {
                 this.send_ticket(rsa_encrypt(this.reply_link.pub_key, this.password + String.fromCharCode(0)));
-                this.state = "ticket";
+                this.set_state("ticket");
                 this.wire_reader.request(SpiceLinkAuthReply.prototype.buffer_size());
             }
         }
@@ -241,7 +244,7 @@ SpiceConn.prototype =
                     DEBUG > 0 && console.log("Request display init");
                     this.send_msg(reply);
                 }
-                this.state = "ready";
+                this.set_state("ready");
                 this.wire_reader.request(SpiceMiniData.prototype.buffer_size());
                 if (this.timeout)
                 {
@@ -251,7 +254,7 @@ SpiceConn.prototype =
             }
             else
             {
-                this.state = "error";
+                this.set_state("error");
                 if (this.auth_reply.auth_code == SPICE_LINK_ERR_PERMISSION_DENIED)
                 {
                     var e = new Error("Permission denied.");
@@ -440,6 +443,15 @@ SpiceConn.prototype =
         var e = new Error("Connection timed out.");
         this.report_error(e);
     },
+
+    set_state: function(new_state)
+    {
+        var oldstate = this.state;
+        this.state = new_state;
+
+        if (this.onchange_state)
+            this.onchange_state(oldstate, this.state);
+    }
 }
 
 function spiceconn_timeout(sc)
