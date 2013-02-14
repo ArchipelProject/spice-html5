@@ -1,4 +1,4 @@
-/*/* "use strict" commented for Cappuccino */*/
+/* "use strict" commented for Cappuccino */
 /* use strict is commented out because it results in a 5x slowdone in chrome */
 /*
  *    Copyright (C) 2012 by Jeremy P. White <jwhite@codeweavers.com>
