@@ -56,6 +56,7 @@ function stripAlpha(d)
 **--------------------------------------------------------------------------*/
 SpiceDisplayConn = function()
 {
+    this.scale_factor = 1.0;
     SpiceConn.apply(this, arguments);
 }
 
@@ -717,6 +718,16 @@ SpiceDisplayConn.prototype.destroy_surfaces = function()
     this.surfaces = undefined;
 }
 
+SpiceDisplayConn.prototype.set_scale = function(scale_factor)
+{
+    this.scale_factor = scale_factor;
+
+    if (this.primary_surface !== undefined)
+    {
+        var canvas = this.surfaces[this.primary_surface].canvas;
+        canvas.style.zoom = this.scale_factor;
+    }
+}
 
 function handle_mouseover(e)
 {

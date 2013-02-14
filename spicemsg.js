@@ -639,8 +639,12 @@ SpiceMsgcMousePosition = function(sc, e)
     this.buttons_state = sc.buttons_state;
     if (e)
     {
-        this.x = e.clientX - sc.display.surfaces[sc.display.primary_surface].canvas.offsetLeft + document.body.scrollLeft;
-        this.y = e.clientY - sc.display.surfaces[sc.display.primary_surface].canvas.offsetTop + document.body.scrollTop;
+        var scale_factor = sc.display.scale_factor;
+            canvas = sc.display.surfaces[sc.display.primary_surface].canvas,
+            position = get_event_position(e, canvas, scale_factor);
+
+        this.x = position.x;
+        this.y = position.y;
         sc.mousex = this.x;
         sc.mousey = this.y;
     }

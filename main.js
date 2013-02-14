@@ -176,3 +176,8 @@ SpiceMainConn.prototype.stop = function(msg)
             this.extra_channels[e].cleanup();
     this.extra_channels = undefined;
 }
+
+SpiceMainConn.prototype.set_scale = function(scale_factor)
+{
+    this.display.set_scale(scale_factor);
+}
