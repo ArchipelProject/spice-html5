@@ -254,13 +254,14 @@ SpiceConn.prototype =
             }
             else
             {
-                this.set_state("error");
                 if (this.auth_reply.auth_code == SPICE_LINK_ERR_PERMISSION_DENIED)
                 {
+                    this.set_state("needs_password");
                     var e = new Error("Permission denied.");
                 }
                 else
                 {
+                    this.set_state("error");
                     var e = new Error("Unexpected link error " + this.auth_reply.auth_code);
                 }
                 this.report_error(e);
