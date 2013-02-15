@@ -539,13 +539,15 @@ SpiceDisplayConn.prototype.process_channel_message = function(msg)
 SpiceDisplayConn.prototype.delete_surface = function(surface_id)
 {
     var canvas = document.getElementById("spice_surface_" + surface_id);
-    if (DUMP_CANVASES && this.parent.dump_id)
+
+    if (DUMP_CANVASES && this.parent.dump_id && canvas)
         document.getElementById(this.parent.dump_id).removeChild(canvas);
     if (this.primary_surface == surface_id)
     {
         this.unhook_events();
         this.primary_surface = undefined;
-        document.getElementById(this.parent.screen_id).removeChild(canvas);
+        if (canvas)
+            document.getElementById(this.parent.screen_id).removeChild(canvas);
     }
 
     delete this.surfaces[surface_id];
